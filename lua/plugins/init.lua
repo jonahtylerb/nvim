@@ -5,9 +5,8 @@ return {
     ---@type blink.cmp.Config
     opts = {
       completion = {
-        documentation = { window = { border = "rounded" } },
+        documentation = { window = { border = "single" } },
       },
-      signature = { enabled = true, window = { border = "rounded" } },
     },
   },
 
@@ -82,7 +81,7 @@ return {
     event = "VeryLazy",
     opts = {
       current_only = true,
-      winblend = 0,
+      winblend = 100,
       excluded_filetypes = { "snacks_picker_list", "terminal" },
       width = 1,
     },
@@ -273,17 +272,25 @@ return {
   },
 
   {
-    "f-person/git-blame.nvim",
-    cmd = { "GitBlameToggle", "GitBlameOpenCommitURL" },
+    "lewis6991/gitsigns.nvim",
     opts = {
-      message_template = "<author> <date> <=> <summary>",
-      message_when_not_commited = "",
-      date_format = "%r",
-      max_commit_summary_length = 50,
+      current_line_blame_formatter = "<author>, <author_time:%R> ~ <summary>",
+      current_line_blame_opts = {
+        delay = 100,
+        virt_text_pos = "right_align",
+      },
     },
     keys = {
-      { "<leader>gu", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git Blame Line" },
-      { "<leader>go", "<cmd>GitBlameOpenCommitURL<cr>", desc = "Toggle Git Blame Line" },
+      { "<leader>gu", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Git Blame Line" },
+    },
+  },
+
+  {
+    "Darazaki/indent-o-matic",
+    event = "LazyFile",
+    opts = {
+      max_lines = 1024,
+      standard_widths = { 2, 3, 4, 8 },
     },
   },
 }

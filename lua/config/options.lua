@@ -4,6 +4,7 @@
 vim.o.timeoutlen = 500
 vim.g.trouble_lualine = false
 vim.g.mousemodel = "extend"
+vim.opt_local.expandtab = true
 vim.g.working = false
 
 vim.g.autoformat = not vim.g.working
