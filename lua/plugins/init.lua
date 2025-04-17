@@ -5,9 +5,8 @@ return {
     ---@type blink.cmp.Config
     opts = {
       completion = {
-        documentation = { window = { border = "rounded" } },
+        documentation = { window = { border = "single" } },
       },
-      signature = { enabled = true, window = { border = "rounded" } },
     },
   },
 
@@ -15,6 +14,7 @@ return {
 
   {
     "tenxsoydev/karen-yank.nvim",
+    vscode = true,
     event = "VeryLazy",
     config = true,
   },
@@ -27,6 +27,7 @@ return {
 
   {
     "stevearc/oil.nvim",
+    vscode = true,
     cmd = "Oil",
     config = true,
   },
@@ -45,8 +46,10 @@ return {
 
   {
     "max397574/better-escape.nvim",
+    enabled = not vim.g.desktop,
     event = "VeryLazy",
     opts = {
+      default_mappings = false,
       mappings = {
         i = { j = { k = "<Esc>" } },
         c = { j = { k = "<Esc>" } },
@@ -59,6 +62,7 @@ return {
 
   {
     "axelvc/template-string.nvim",
+    vscode = true,
     event = "InsertEnter",
     opts = {
       filetypes = {
@@ -82,9 +86,23 @@ return {
     event = "VeryLazy",
     opts = {
       current_only = true,
-      winblend = 0,
+      winblend = 100,
       excluded_filetypes = { "snacks_picker_list", "terminal" },
       width = 1,
+    },
+  },
+
+  {
+    "codethread/qmk.nvim",
+    event = "VeryLazy",
+    opts = {
+      name = "LAYOUT_planck_mit",
+      layout = {
+        "x x x x x x x x x x x x",
+        "x x x x x x x x x x x x",
+        "x x x x x x x x x x x x",
+        "x x x x x x^x x x x x x",
+      },
     },
   },
 
@@ -97,21 +115,48 @@ return {
 
   {
     "chrisgrieser/nvim-various-textobjs",
+    vscode = true,
     event = "VeryLazy",
     lazy = false,
-    opts = {
-      keymaps = {
-        useDefaults = true,
-      },
-    },
+    opts = function()
+      vim.keymap.set("n", "dsi", function()
+        -- select outer indentation
+        require("various-textobjs").indentation("outer", "outer")
+
+        -- plugin only switches to visual mode when a textobj has been found
+        local indentationFound = vim.fn.mode():find("V")
+        if not indentationFound then
+          return
+        end
+
+        -- dedent indentation
+        vim.cmd.normal({ "<", bang = true })
+
+        -- delete surrounding lines
+        local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+        local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
+        vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
+        vim.cmd(tostring(startBorderLn) .. " delete")
+      end, { desc = "Delete Surrounding Indentation" })
+
+      return {
+        keymaps = {
+          useDefaults = true,
+        },
+      }
+    end,
   },
 
   {
     "S1M0N38/love2d.nvim",
+    vscode = true,
     cmd = "LoveRun",
     opts = {
       restart_on_save = false,
       path_to_love_bin = "~/Downloads/love-11.5-x86_64.AppImage",
+      debug_window_opts = {
+        split = "below",
+      },
     },
     keys = {
       { "<leader>v", ft = "lua", desc = "LÖVE" },
@@ -151,6 +196,7 @@ return {
 
   {
     "echasnovski/mini.splitjoin",
+    vscode = true,
     config = true,
     keys = {
       { "gS", desc = "Toggle split/join" },
@@ -159,6 +205,7 @@ return {
 
   {
     "gbprod/substitute.nvim",
+    vscode = true,
     config = true,
     keys = {
       { ";", "<cmd>lua require('substitute').operator()<cr>", desc = "Replace" },
@@ -175,10 +222,6 @@ return {
     keys = {
       { "<leader>su", "<cmd>lua require('undotree').toggle()<cr>" },
     },
-  },
-
-  {
-    { "meznaric/key-analyzer.nvim", config = true, cmd = "KeyAnalyzer" },
   },
 
   {
@@ -273,17 +316,11 @@ return {
   },
 
   {
-    "f-person/git-blame.nvim",
-    cmd = { "GitBlameToggle", "GitBlameOpenCommitURL" },
+    "Darazaki/indent-o-matic",
+    event = "LazyFile",
     opts = {
-      message_template = "<author> <date> <=> <summary>",
-      message_when_not_commited = "",
-      date_format = "%r",
-      max_commit_summary_length = 50,
-    },
-    keys = {
-      { "<leader>gu", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git Blame Line" },
-      { "<leader>go", "<cmd>GitBlameOpenCommitURL<cr>", desc = "Toggle Git Blame Line" },
+      max_lines = 1024,
+      standard_widths = { 2, 3, 4, 8 },
     },
   },
 }
