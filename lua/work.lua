@@ -2,8 +2,9 @@
 if vim.g.working then
   return {
     { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.ai.copilot" },
+    -- { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+    { import = "lazyvim.plugins.extras.ai.codeium" },
   }
 end
 
@@ -53,22 +54,6 @@ if not vim.g.working then
     --       end,
     --       mode = "i",
     --       desc = "󰚩 Accept word",
-    --     },
-    --     {
-    --       "<C-}>",
-    --       function()
-    --         require("neocodeium").cycle(1)
-    --       end,
-    --       mode = "i",
-    --       desc = "󰚩 Next suggestion",
-    --     },
-    --     {
-    --       "<C-}>",
-    --       function()
-    --         require("neocodeium").cycle(-1)
-    --       end,
-    --       mode = "i",
-    --       desc = "󰚩 Prev suggestion",
     --     },
     --     {
     --       "<leader>ci",

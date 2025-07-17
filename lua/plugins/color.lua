@@ -28,8 +28,6 @@ return {
   },
   {
     "Shatur/neovim-ayu",
-    lazy = false,
-    priority = 1000,
     config = function()
       local transparent = { bg = "None" }
 

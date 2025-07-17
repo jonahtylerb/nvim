@@ -1,16 +1,21 @@
 return {
+  { "akinsho/git-conflict.nvim", version = "*", config = true, event = "VeryLazy" },
+
   {
-    "saghen/blink.cmp",
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
+    "akinsho/bufferline.nvim",
     opts = {
-      completion = {
-        documentation = { window = { border = "single" } },
+      highlights = {
+        buffer_selected = {
+          link = "Label",
+          bold = true,
+          italic = false,
+        },
+      },
+      options = {
+        separator_style = vim.g.neovide and "slant",
       },
     },
   },
-
-  { "akinsho/git-conflict.nvim", version = "*", config = true, event = "VeryLazy" },
 
   {
     "tenxsoydev/karen-yank.nvim",
@@ -22,12 +27,11 @@ return {
   {
     "nullromo/go-up.nvim",
     config = true,
-    event = "VeryLazy",
+    event = "LazyFile",
   },
 
   {
     "stevearc/oil.nvim",
-    vscode = true,
     cmd = "Oil",
     config = true,
   },
@@ -94,7 +98,7 @@ return {
 
   {
     "codethread/qmk.nvim",
-    event = "VeryLazy",
+    event = "BufEnter keymap.c",
     opts = {
       name = "LAYOUT_planck_mit",
       layout = {
@@ -149,7 +153,6 @@ return {
 
   {
     "S1M0N38/love2d.nvim",
-    vscode = true,
     cmd = "LoveRun",
     opts = {
       restart_on_save = false,
@@ -234,21 +237,15 @@ return {
 
       local set = vim.keymap.set
 
-      -- Add or skip cursor above/below the main cursor.
-      set({ "n", "x" }, "<up>", function()
+      -- Add cursor above/below the main cursor.
+      set({ "n", "x" }, "<leader><up>", function()
         mc.lineAddCursor(-1)
       end)
-      set({ "n", "x" }, "<down>", function()
+      set({ "n", "x" }, "<leader><down>", function()
         mc.lineAddCursor(1)
       end)
-      set({ "n", "x" }, "<leader><up>", function()
-        mc.lineSkipCursor(-1)
-      end)
-      set({ "n", "x" }, "<leader><down>", function()
-        mc.lineSkipCursor(1)
-      end)
 
-      -- Add or skip adding a new cursor by matching word/selection
+      -- Add a new cursor by matching word/selection
       set({ "n", "x" }, "<leader>z", function()
         mc.matchAddCursor(1)
       end)
@@ -275,7 +272,7 @@ return {
         layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
 
         -- Enable and clear cursors using escape.
-        layerSet("n", "<esc>", function()
+        layerSet("n", "<c-z>", function()
           if not mc.cursorsEnabled() then
             mc.enableCursors()
           else
@@ -307,7 +304,6 @@ return {
           { section = "header", height = 10 },
           { section = "keys", padding = 1 },
           { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
           { section = "startup", padding = 2 },
         },
       },
