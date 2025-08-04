@@ -2,6 +2,17 @@ return {
   { "akinsho/git-conflict.nvim", version = "*", config = true, event = "VeryLazy" },
 
   {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = {
+        theme = "auto",
+        component_separators = "",
+        section_separators = { left = " 󰄛", right = "" },
+      },
+    },
+  },
+
+  {
     "akinsho/bufferline.nvim",
     opts = {
       highlights = {
@@ -308,6 +319,12 @@ return {
         },
       },
       scroll = { enabled = not vim.g.neovide },
+      picker = {
+        sources = {
+          files = { hidden = true },
+          explorer = { hidden = true },
+        },
+      },
     },
   },
 
