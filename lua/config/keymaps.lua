@@ -7,9 +7,6 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "Paste below current line" })
 keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "Paste above current line" })
 
-keymap.set("n", "<leader>a", "m`a <ESC>``", { desc = "Add a space to the left" })
-keymap.set("n", "<leader>i", "m`i <ESC>``", { desc = "Add a space to the right" })
-
 keymap.set("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", {
   expr = true,
   desc = "Insert line below",

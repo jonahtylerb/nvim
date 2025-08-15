@@ -19,13 +19,12 @@ end
 
 vim.g.autoformat = not vim.g.working
 
-vim.g.desktop = terminalCMD("hostnamectl | grep Chassis | awk '{print $2}'"):match("desktop")
 
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font Mono"
   vim.g.neovide_padding_top = 4
-  vim.g.neovide_scale_factor = 0.8
-  vim.g.neovide_opacity = 0.75
+  vim.g.neovide_scale_factor = 0.75
+  vim.g.neovide_opacity = 0.6
   vim.g.neovide_scroll_animation_length = 0.3
   vim.g.neovide_cursor_trail_size = 0.5
   vim.g.neovide_floating_corner_radius = 0.5

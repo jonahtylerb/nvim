@@ -48,30 +48,9 @@ return {
   },
 
   {
-    "xiyaowong/nvim-transparent",
-    cmd = { "TransparentDisable", "TransparentEnable", "TransparentToggle" },
-  },
-
-  {
     "stevearc/conform.nvim",
     opts = {
       default_format_opts = { timeout_ms = 10000 },
-    },
-  },
-
-  {
-    "max397574/better-escape.nvim",
-    enabled = not vim.g.desktop,
-    event = "VeryLazy",
-    opts = {
-      default_mappings = false,
-      mappings = {
-        i = { j = { k = "<Esc>" } },
-        c = { j = { k = "<Esc>" } },
-        t = { j = { k = "<Esc>" } },
-        v = { j = { k = "<Esc>" } },
-        s = { j = { k = "<Esc>" } },
-      },
     },
   },
 
@@ -173,9 +152,9 @@ return {
       },
     },
     keys = {
-      { "<leader>v", ft = "lua", desc = "LÖVE" },
-      { "<leader>vv", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
-      { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua", desc = "Stop LÖVE" },
+      { "<leader>v",  ft = "lua",          desc = "LÖVE" },
+      { "<leader>vv", "<cmd>LoveRun<cr>",  ft = "lua",   desc = "Run LÖVE" },
+      { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua",   desc = "Stop LÖVE" },
     },
   },
 
@@ -212,9 +191,7 @@ return {
     "echasnovski/mini.splitjoin",
     vscode = true,
     config = true,
-    keys = {
-      { "gS", desc = "Toggle split/join" },
-    },
+    keys = { { "gS", desc = "Toggle split/join" }, },
   },
 
   {
@@ -222,10 +199,10 @@ return {
     vscode = true,
     config = true,
     keys = {
-      { ";", "<cmd>lua require('substitute').operator()<cr>", desc = "Replace" },
-      { ";;", "<cmd>lua require('substitute').line()<cr>", desc = "Replace Line" },
-      { ";l", "<cmd>lua require('substitute').eol()<cr>", desc = "Replace EOL" },
-      { ";", "<cmd>lua require('substitute').visual()<cr>", desc = "Replace", mode = { "x" } },
+      { ";",  "<cmd>lua require('substitute').operator()<cr>", desc = "Replace" },
+      { ";;", "<cmd>lua require('substitute').line()<cr>",     desc = "Replace Line" },
+      { ";l", "<cmd>lua require('substitute').eol()<cr>",      desc = "Replace EOL" },
+      { ";",  "<cmd>lua require('substitute').visual()<cr>",   desc = "Replace",     mode = { "x" } },
     },
   },
 
@@ -309,7 +286,8 @@ return {
     opts = {
       dashboard = {
         preset = {
-          header = "                                                 _.oo.          \n                         _.u[[/;:,.         .odMMMMMM'          \n                      .o888UU[[[/;:-.  .o@P^    MMM^            \n                     oN88888UU[[[/;::-.        dP^              \n███╗   ██╗███████╗  dNMMNN888UU[[[/;:--. ██╗.@P██╗██╗███╗   ███╗\n████╗  ██║██╔════╝ ,MMMMMMN888UU[[/;::-. ██║   ██║██║████╗ ████║\n██╔██╗ ██║█████╗   NNMMMNN888UU[[[/~.o@P^██║   ██║██║██╔████╔██║\n██║╚██╗██║██╔══╝   888888888UU[[[/o@^-.. ╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚████║███████╗oI8888UU[[[/o@P^:--..   ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝  ╚═══╝╚══════╝  YUU[[[/o@^;::---..     ╚═══╝  ╚═╝╚═╝     ╚═╝\n             oMP     ^/o@P^;:::---..                            \n          .dMMM    .o@^ ^;::---...                              \n         dMMMMMMM@^`       `^^^^                                \n        YMMMUP^                                                 \n         ^^                                                     ",
+          header =
+          "                                                 _.oo.          \n                         _.u[[/;:,.         .odMMMMMM'          \n                      .o888UU[[[/;:-.  .o@P^    MMM^            \n                     oN88888UU[[[/;::-.        dP^              \n███╗   ██╗███████╗  dNMMNN888UU[[[/;:--. ██╗.@P██╗██╗███╗   ███╗\n████╗  ██║██╔════╝ ,MMMMMMN888UU[[/;::-. ██║   ██║██║████╗ ████║\n██╔██╗ ██║█████╗   NNMMMNN888UU[[[/~.o@P^██║   ██║██║██╔████╔██║\n██║╚██╗██║██╔══╝   888888888UU[[[/o@^-.. ╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚████║███████╗oI8888UU[[[/o@P^:--..   ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝  ╚═══╝╚══════╝  YUU[[[/o@^;::---..     ╚═══╝  ╚═╝╚═╝     ╚═╝\n             oMP     ^/o@P^;:::---..                            \n          .dMMM    .o@^ ^;::---...                              \n         dMMMMMMM@^`       `^^^^                                \n        YMMMUP^                                                 \n         ^^                                                     ",
         },
         sections = {
           { section = "header", height = 10 },
