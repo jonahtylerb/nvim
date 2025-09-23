@@ -29,6 +29,12 @@ return {
   },
 
   {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+
+  {
     "tenxsoydev/karen-yank.nvim",
     vscode = true,
     event = "VeryLazy",
@@ -152,9 +158,9 @@ return {
       },
     },
     keys = {
-      { "<leader>v",  ft = "lua",          desc = "LÖVE" },
-      { "<leader>vv", "<cmd>LoveRun<cr>",  ft = "lua",   desc = "Run LÖVE" },
-      { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua",   desc = "Stop LÖVE" },
+      { "<leader>v", ft = "lua", desc = "LÖVE" },
+      { "<leader>vv", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
+      { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua", desc = "Stop LÖVE" },
     },
   },
 
@@ -188,10 +194,24 @@ return {
   },
 
   {
-    "echasnovski/mini.splitjoin",
+    "Wansmer/treesj",
     vscode = true,
-    config = true,
-    keys = { { "gS", desc = "Toggle split/join" }, },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    keys = {
+      { "<leader>m", desc = "Toggle split" },
+      { "<leader>M", desc = "Toggle split recursive" },
+    },
+    opts = function()
+      vim.keymap.set("n", "<leader>m", require("treesj").toggle, { desc = "Toggle split" })
+      vim.keymap.set("n", "<leader>M", function()
+        require("treesj").toggle({ split = { recursive = true } })
+      end, { desc = "Toggle split recursive" })
+
+      return {
+        use_default_keymaps = false,
+        max_join_length = 1000,
+      }
+    end,
   },
 
   {
@@ -199,10 +219,10 @@ return {
     vscode = true,
     config = true,
     keys = {
-      { ";",  "<cmd>lua require('substitute').operator()<cr>", desc = "Replace" },
-      { ";;", "<cmd>lua require('substitute').line()<cr>",     desc = "Replace Line" },
-      { ";l", "<cmd>lua require('substitute').eol()<cr>",      desc = "Replace EOL" },
-      { ";",  "<cmd>lua require('substitute').visual()<cr>",   desc = "Replace",     mode = { "x" } },
+      { ";", "<cmd>lua require('substitute').operator()<cr>", desc = "Replace" },
+      { ";;", "<cmd>lua require('substitute').line()<cr>", desc = "Replace Line" },
+      { ";l", "<cmd>lua require('substitute').eol()<cr>", desc = "Replace EOL" },
+      { ";", "<cmd>lua require('substitute').visual()<cr>", desc = "Replace", mode = { "x" } },
     },
   },
 
@@ -228,18 +248,18 @@ return {
       -- Add cursor above/below the main cursor.
       set({ "n", "x" }, "<leader><up>", function()
         mc.lineAddCursor(-1)
-      end)
+      end, { desc = "Add cursor above" })
       set({ "n", "x" }, "<leader><down>", function()
         mc.lineAddCursor(1)
-      end)
+      end, { desc = "Add cursor below" })
 
       -- Add a new cursor by matching word/selection
       set({ "n", "x" }, "<leader>z", function()
         mc.matchAddCursor(1)
-      end)
+      end, { desc = "Add cursor to word" })
       set({ "n", "x" }, "<leader>Z", function()
         mc.matchAddCursor(-1)
-      end)
+      end, { desc = "Add cursor to word before" })
 
       -- Add and remove cursors with control + left click.
       set("n", "<c-leftmouse>", mc.handleMouse)
@@ -247,7 +267,7 @@ return {
       set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
       -- Disable and enable cursors.
-      set({ "n", "x" }, "<c-z>", mc.toggleCursor)
+      set({ "n", "x" }, "<c-z>", mc.toggleCursor, { desc = "Disable multicursors" })
 
       -- Mappings defined in a keymap layer only apply when there are
       -- multiple cursors. This lets you have overlapping mappings.
@@ -257,7 +277,7 @@ return {
         layerSet({ "n", "x" }, "<right>", mc.nextCursor)
 
         -- Delete the main cursor.
-        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor, { desc = "Delete cursor" })
 
         -- Enable and clear cursors using escape.
         layerSet("n", "<c-z>", function()
@@ -286,13 +306,11 @@ return {
     opts = {
       dashboard = {
         preset = {
-          header =
-          "                                                 _.oo.          \n                         _.u[[/;:,.         .odMMMMMM'          \n                      .o888UU[[[/;:-.  .o@P^    MMM^            \n                     oN88888UU[[[/;::-.        dP^              \n███╗   ██╗███████╗  dNMMNN888UU[[[/;:--. ██╗.@P██╗██╗███╗   ███╗\n████╗  ██║██╔════╝ ,MMMMMMN888UU[[/;::-. ██║   ██║██║████╗ ████║\n██╔██╗ ██║█████╗   NNMMMNN888UU[[[/~.o@P^██║   ██║██║██╔████╔██║\n██║╚██╗██║██╔══╝   888888888UU[[[/o@^-.. ╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚████║███████╗oI8888UU[[[/o@P^:--..   ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝  ╚═══╝╚══════╝  YUU[[[/o@^;::---..     ╚═══╝  ╚═╝╚═╝     ╚═╝\n             oMP     ^/o@P^;:::---..                            \n          .dMMM    .o@^ ^;::---...                              \n         dMMMMMMM@^`       `^^^^                                \n        YMMMUP^                                                 \n         ^^                                                     ",
+          header = "                                                 _.oo.          \n                         _.u[[/;:,.         .odMMMMMM'          \n                      .o888UU[[[/;:-.  .o@P^    MMM^            \n                     oN88888UU[[[/;::-.        dP^              \n███╗   ██╗███████╗  dNMMNN888UU[[[/;:--. ██╗.@P██╗██╗███╗   ███╗\n████╗  ██║██╔════╝ ,MMMMMMN888UU[[/;::-. ██║   ██║██║████╗ ████║\n██╔██╗ ██║█████╗   NNMMMNN888UU[[[/~.o@P^██║   ██║██║██╔████╔██║\n██║╚██╗██║██╔══╝   888888888UU[[[/o@^-.. ╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚████║███████╗oI8888UU[[[/o@P^:--..   ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝  ╚═══╝╚══════╝  YUU[[[/o@^;::---..     ╚═══╝  ╚═╝╚═╝     ╚═╝\n             oMP     ^/o@P^;:::---..                            \n          .dMMM    .o@^ ^;::---...                              \n         dMMMMMMM@^`       `^^^^                                \n        YMMMUP^                                                 \n         ^^                                                     ",
         },
         sections = {
-          { section = "header", height = 10 },
-          { section = "keys", padding = 1 },
-          { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+          { section = "header", height = 8 },
+          { section = "keys" },
           { section = "startup", padding = 2 },
         },
       },
@@ -312,6 +330,25 @@ return {
     opts = {
       max_lines = 1024,
       standard_widths = { 2, 3, 4, 8 },
+    },
+  },
+
+  {
+    "andre-kotake/nvim-chezmoi",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      edit = {
+        apply_on_save = "auto",
+      },
+    },
+  },
+
+  {
+    "m4xshen/smartcolumn.nvim",
+    event = "LazyFile",
+    opts = {
+      colorcolumn = { "90", "140" },
     },
   },
 }
