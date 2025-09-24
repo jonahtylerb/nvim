@@ -117,7 +117,6 @@ return {
     "chrisgrieser/nvim-various-textobjs",
     vscode = true,
     event = "VeryLazy",
-    lazy = false,
     opts = function()
       vim.keymap.set("n", "dsi", function()
         -- select outer indentation
