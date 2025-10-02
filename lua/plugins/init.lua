@@ -37,7 +37,7 @@ return {
   {
     "tenxsoydev/karen-yank.nvim",
     vscode = true,
-    event = "VeryLazy",
+    keys = { "y" },
     config = true,
   },
 
@@ -83,7 +83,7 @@ return {
 
   {
     "lewis6991/satellite.nvim",
-    event = "VeryLazy",
+    event = "LazyFile",
     opts = {
       current_only = true,
       winblend = 100,
@@ -160,35 +160,6 @@ return {
       { "<leader>v", ft = "lua", desc = "LÖVE" },
       { "<leader>vv", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
       { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua", desc = "Stop LÖVE" },
-    },
-  },
-
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      { "stevearc/dressing.nvim" },
-    },
-    cmd = "CodeCompanionChat",
-    opts = {
-      adapters = {
-        llama3 = function()
-          return require("codecompanion.adapters").extend("ollama", {
-            name = "llama3",
-            schema = {
-              model = {
-                default = "llama3.2",
-              },
-            },
-          })
-        end,
-      },
-      strategies = {
-        chat = { adapter = "llama3" },
-        inline = { adapter = "llama3" },
-        agent = { adapter = "llama3" },
-      },
     },
   },
 
