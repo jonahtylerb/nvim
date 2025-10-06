@@ -21,7 +21,6 @@ return {
           CursorLine = transparent,
           CursorColumn = transparent,
           VertSplit = transparent,
-          NonText = { fg = "#003355" },
         },
       })
     end,
