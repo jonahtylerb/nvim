@@ -321,4 +321,15 @@ return {
       colorcolumn = { "90", "140" },
     },
   },
+
+  {
+    "bennypowers/nvim-regexplainer",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      { "<space>R", "<cmd>RegexplainerToggle<cr>", desc = "Toggle regexplainer" },
+    },
+  },
 }
