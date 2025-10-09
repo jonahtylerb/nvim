@@ -6,5 +6,4 @@ debug
 foo.*
 *.log
 data
-./lua/work.lua
-./lua/config/options.lua
+lazy-lock.json
