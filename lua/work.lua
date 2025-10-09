@@ -5,10 +5,7 @@ if vim.g.working then
     { import = "lazyvim.plugins.extras.ai.sidekick" },
     -- { import = "lazyvim.plugins.extras.ai.codeium" },
   }
-end
-
--- Plugins enabled when I'm not working
-if not vim.g.working then
+else
   return {
     { import = "lazyvim.plugins.extras.ai.codeium" },
   }

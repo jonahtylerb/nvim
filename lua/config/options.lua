@@ -17,8 +17,9 @@ local function terminalCMD(cmd)
   return tostring(output)
 end
 
-vim.g.autoformat = not vim.g.working
+vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
 
+vim.g.autoformat = not vim.g.working
 
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font Mono"
@@ -27,6 +28,7 @@ if vim.g.neovide then
   vim.g.neovide_opacity = 0.6
   vim.g.neovide_scroll_animation_length = 0.3
   vim.g.neovide_cursor_trail_size = 0.5
+  vim.g.neovide_floating_shadow = false
   vim.g.neovide_floating_corner_radius = 0.5
   vim.g.neovide_scroll_animation_far_lines = 30
 end
