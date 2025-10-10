@@ -19,6 +19,20 @@ end
 
 vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
 
+local copilotAccount = terminalCMD("gh auth status | grep -B1 'Active account: true' | head -1 | awk '{print $7}'")
+
+if copilotAccount then
+  if vim.g.working then
+    if copilotAccount:match("jonahtylerb") then
+      os.execute("gh auth switch")
+    end
+  else
+    if not copilotAccount:match("jonahtylerb") then
+      os.execute("gh auth switch")
+    end
+  end
+end
+
 vim.g.autoformat = not vim.g.working
 
 if vim.g.neovide then
