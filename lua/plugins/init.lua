@@ -304,17 +304,6 @@ return {
   },
 
   {
-    "andre-kotake/nvim-chezmoi",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      edit = {
-        apply_on_save = "auto",
-      },
-    },
-  },
-
-  {
     "m4xshen/smartcolumn.nvim",
     event = "LazyFile",
     opts = {
