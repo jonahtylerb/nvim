@@ -277,6 +277,9 @@ return {
           explorer = { hidden = true },
         },
       },
+      bigfile = {
+        enabled = false,
+      },
     },
   },
 
