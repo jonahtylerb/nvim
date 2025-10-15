@@ -30,7 +30,14 @@ return {
 
   {
     "sindrets/diffview.nvim",
-    event = "VeryLazy",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+      "DiffviewLog",
+      "DiffviewRefresh",
+    },
     config = true,
   },
 
@@ -207,7 +214,6 @@ return {
 
   {
     "jake-stewart/multicursor.nvim",
-    event = "VeryLazy",
     branch = "1.0",
     config = function()
       local mc = require("multicursor-nvim")
@@ -238,37 +244,17 @@ return {
 
       -- Disable and enable cursors.
       set({ "n", "x" }, "<c-z>", mc.toggleCursor, { desc = "Disable multicursors" })
-
-      -- Mappings defined in a keymap layer only apply when there are
-      -- multiple cursors. This lets you have overlapping mappings.
-      mc.addKeymapLayer(function(layerSet)
-        -- Select a different cursor as the main one.
-        layerSet({ "n", "x" }, "<left>", mc.prevCursor)
-        layerSet({ "n", "x" }, "<right>", mc.nextCursor)
-
-        -- Delete the main cursor.
-        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor, { desc = "Delete cursor" })
-
-        -- Enable and clear cursors using escape.
-        layerSet("n", "<c-z>", function()
-          if not mc.cursorsEnabled() then
-            mc.enableCursors()
-          else
-            mc.clearCursors()
-          end
-        end)
-      end)
-
-      -- Customize how cursors look.
-      local hl = vim.api.nvim_set_hl
-      hl(0, "MultiCursorCursor", { link = "Cursor" })
-      hl(0, "MultiCursorVisual", { link = "Visual" })
-      hl(0, "MultiCursorSign", { link = "SignColumn" })
-      hl(0, "MultiCursorMatchPreview", { link = "Search" })
-      hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
-      hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
-      hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
     end,
+    keys = {
+      "<leader><up>",
+      "<leader><down>",
+      "<leader>z",
+      "<leader>Z",
+      "<c-leftmouse>",
+      "<c-leftdrag>",
+      "<c-leftrelease>",
+      "<c-z>",
+    },
   },
 
   {
