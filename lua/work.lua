@@ -2,7 +2,6 @@
 if vim.g.working then
   return {
     { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.ai.codeium" },
     {
       "neovim/nvim-lspconfig",
       opts = {
@@ -23,7 +22,6 @@ if vim.g.working then
   }
 else
   return {
-    { import = "lazyvim.plugins.extras.ai.codeium" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
   }
 end

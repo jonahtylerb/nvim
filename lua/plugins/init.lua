@@ -310,4 +310,40 @@ return {
       { "<space>R", "<cmd>RegexplainerToggle<cr>", desc = "Toggle regexplainer" },
     },
   },
+
+  {
+    "Exafunction/windsurf.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("codeium").setup({
+        enable_cmp_source = false,
+        virtual_text = {
+          enabled = true,
+          idle_delay = 50,
+        },
+        accept_fallback = "<cr>",
+        key_bindings = {
+          accept = "<Tab>",
+          accept_word = "c-i",
+          accept_line = "<c-o>",
+          clear = "<M-x>",
+          next = "<M-]>",
+          prev = "<M-[>",
+        },
+      })
+    end,
+  },
+
+  {
+    "saghen/blink.cmp",
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      completion = {
+        ghost_text = {
+          enabled = false,
+        },
+      },
+    },
+  },
 }
