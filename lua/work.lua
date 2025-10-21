@@ -2,23 +2,6 @@
 if vim.g.working then
   return {
     { import = "lazyvim.plugins.extras.linting.eslint" },
-    {
-      "neovim/nvim-lspconfig",
-      opts = {
-        servers = { eslint = {} },
-        setup = {
-          eslint = function()
-            require("lazyvim.util").lsp.on_attach(function(client)
-              if client.name == "eslint" then
-                client.server_capabilities.documentFormattingProvider = true
-              else
-                client.server_capabilities.documentFormattingProvider = false
-              end
-            end)
-          end,
-        },
-      },
-    },
   }
 else
   return {

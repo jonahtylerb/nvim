@@ -19,6 +19,8 @@ end
 
 vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
 
+vim.g.autoformat = not vim.g.working
+
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font Mono"
   vim.g.neovide_padding_top = 4
