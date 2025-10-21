@@ -311,26 +311,46 @@ return {
   },
 
   {
-    "Exafunction/windsurf.nvim",
+    "monkoose/neocodeium",
     event = "InsertEnter",
-    config = function()
-      require("codeium").setup({
-        enable_cmp_source = false,
-        virtual_text = {
+    opts = function()
+      local neocodeium = require("neocodeium")
+
+      vim.keymap.set("i", "<Tab>", function()
+        neocodeium.accept()
+      end, { expr = true })
+
+      vim.keymap.set("i", "<c-i>", function()
+        neocodeium.accept_word()
+      end)
+      vim.keymap.set("i", "<c-o>", function()
+        neocodeium.accept_line()
+      end)
+      vim.keymap.set("i", "<A-]>", function()
+        neocodeium.cycle()
+      end)
+      vim.keymap.set("i", "<A-[>", function()
+        neocodeium.cycle(-1)
+      end)
+      vim.keymap.set("i", "<A-c>", function()
+        neocodeium.clear()
+      end)
+
+      return {
+        single_line = {
           enabled = true,
-          idle_delay = 50,
+          label = "",
         },
-        accept_fallback = "<cr>",
-        key_bindings = {
-          accept = "<Tab>",
-          accept_word = "c-i",
-          accept_line = "<c-o>",
-          clear = "<M-x>",
-          next = "<M-]>",
-          prev = "<M-[>",
-        },
-      })
+      }
     end,
+    keys = {
+      { "<Tab>", mode = "i", desc = "Windsurf accept" },
+      { "<c-i>", mode = "i", desc = "Windsurf accept word" },
+      { "<c-o>", mode = "i", desc = "Windsurf accept line" },
+      { "<A-]>", mode = "i", desc = "Windsurf cycle next" },
+      { "<A-[>", mode = "i", desc = "Windsurf cycle previous" },
+      { "<A-c>", mode = "i", desc = "Windsurf clear" },
+    },
   },
 
   {
@@ -342,6 +362,10 @@ return {
         ghost_text = {
           enabled = false,
         },
+      },
+      keymap = {
+        ["<Tab>"] = {},
+        ["<S-Tab>"] = {},
       },
     },
   },
