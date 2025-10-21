@@ -17,13 +17,12 @@ return {
     opts = {
       highlights = {
         buffer_selected = {
-          link = "Label",
           bold = true,
           italic = false,
         },
       },
       options = {
-        separator_style = vim.g.neovide and "slant",
+        separator_style = "thin",
       },
     },
   },
