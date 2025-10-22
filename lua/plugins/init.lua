@@ -337,6 +337,7 @@ return {
               items,
             }
           end,
+          { icon = " ", title = "Projects", section = "projects", indent = 3, padding = 1 },
           { section = "startup", padding = 2 },
         },
       },
@@ -351,6 +352,11 @@ return {
         enabled = false,
       },
     },
+  },
+
+  {
+    "folke/persistence.nvim",
+    enabled = false,
   },
 
   {
@@ -438,6 +444,20 @@ return {
         ["<Tab>"] = {},
         ["<S-Tab>"] = {},
       },
+    },
+  },
+
+  {
+    "olimorris/persisted.nvim",
+    event = "BufReadPre",
+    opts = {
+      use_git_branch = true,
+    },
+    keys = {
+      { "<leader>qs", "<cmd>SessionLoad<cr>", desc = "Restore Session" },
+      { "<leader>qS", "<cmd>SessionSelect<cr>", desc = "Select Session" },
+      { "<leader>ql", "<cmd>SessionLoadLast<cr>", desc = "Restore Last Session" },
+      { "<leader>qd", "<cmd>SessionDelete<cr>", desc = "Delete the Current Session" },
     },
   },
 }
