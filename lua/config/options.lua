@@ -17,7 +17,11 @@ local function terminalCMD(cmd)
   return tostring(output)
 end
 
-vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
+local in_git = LazyVim.root.git() ~= nil
+
+if in_git then
+  vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
+end
 
 vim.g.autoformat = not vim.g.working
 

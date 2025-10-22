@@ -258,14 +258,85 @@ return {
 
   {
     "snacks.nvim",
+    ---@module 'snacks.nvim'
+    ---@type snacks.Config
     opts = {
       dashboard = {
         preset = {
           header = "                                                 _.oo.          \n                         _.u[[/;:,.         .odMMMMMM'          \n                      .o888UU[[[/;:-.  .o@P^    MMM^            \n                     oN88888UU[[[/;::-.        dP^              \n███╗   ██╗███████╗  dNMMNN888UU[[[/;:--. ██╗.@P██╗██╗███╗   ███╗\n████╗  ██║██╔════╝ ,MMMMMMN888UU[[/;::-. ██║   ██║██║████╗ ████║\n██╔██╗ ██║█████╗   NNMMMNN888UU[[[/~.o@P^██║   ██║██║██╔████╔██║\n██║╚██╗██║██╔══╝   888888888UU[[[/o@^-.. ╚██╗ ██╔╝██║██║╚██╔╝██║\n██║ ╚████║███████╗oI8888UU[[[/o@P^:--..   ╚████╔╝ ██║██║ ╚═╝ ██║\n╚═╝  ╚═══╝╚══════╝  YUU[[[/o@^;::---..     ╚═══╝  ╚═╝╚═╝     ╚═╝\n             oMP     ^/o@P^;:::---..                            \n          .dMMM    .o@^ ^;::---...                              \n         dMMMMMMM@^`       `^^^^                                \n        YMMMUP^                                                 \n         ^^                                                     ",
+          keys = {
+            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+            {
+              icon = " ",
+              key = "g",
+              desc = "Lazygit",
+              action = function()
+                Snacks.lazygit({ cwd = LazyVim.root.git() })
+              end,
+            },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+          },
         },
         sections = {
           { section = "header", height = 8 },
-          { section = "keys" },
+          { section = "keys", padding = 1 },
+          function()
+            if not vim.g.working then
+              return {}
+            end
+
+            local mr_output = vim.fn.system("glab mr list --assignee=@me -F json")
+            if vim.v.shell_error ~= 0 or mr_output == "" then
+              return {}
+            end
+
+            local ok, mrs = pcall(vim.json.decode, mr_output)
+            if not ok or type(mrs) ~= "table" or #mrs == 0 then
+              return {}
+            end
+
+            local items = {}
+
+            for i = 1, math.min(5, #mrs) do
+              local mr = mrs[i]
+              local title = mr.title
+
+              if #title > 50 then
+                title = title:sub(1, 50) .. ".."
+              end
+
+              local username = mr.author.username:sub(1, 2):upper()
+
+              table.insert(items, {
+                text = {
+                  { username, hl = "Identifier", width = 2, align = "right" },
+                  { " " .. title, hl = "Normal", width = 53 },
+                  { tostring(i), hl = "Special", width = 2, align = "right" },
+                },
+                action = function()
+                  vim.fn.system("glab mr view " .. mr.iid .. " --web")
+                  vim.fn.system("glab mr checkout " .. mr.iid)
+                  Snacks.lazygit({ cwd = LazyVim.root.git() })
+                end,
+                key = tostring(i),
+              })
+            end
+
+            return {
+              icon = " ",
+              title = "My Merge Requests",
+              indent = 3,
+              padding = 1,
+              key = "m",
+              action = function()
+                vim.fn.system("glab repo view --web")
+              end,
+              items,
+            }
+          end,
           { section = "startup", padding = 2 },
         },
       },
