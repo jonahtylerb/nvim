@@ -43,7 +43,7 @@ return {
   {
     "tenxsoydev/karen-yank.nvim",
     vscode = true,
-    keys = { "y" },
+    event = "LazyFile",
     config = true,
   },
 
