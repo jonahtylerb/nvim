@@ -318,7 +318,7 @@ return {
                 },
                 action = function()
                   vim.fn.system("glab mr view " .. mr.iid .. " --web")
-                  vim.fn.system("glab mr checkout " .. mr.iid)
+                  vim.fn.system("git checkout " .. mr.source_branch)
                   Snacks.lazygit({ cwd = LazyVim.root.git() })
                 end,
                 key = tostring(i),
