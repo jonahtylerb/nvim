@@ -337,7 +337,7 @@ return {
               items,
             }
           end,
-          { icon = " ", title = "Projects", section = "projects", indent = 3, padding = 1 },
+          { pane = 1, icon = " ", title = "Projects", section = "projects", indent = 3, padding = 1 },
           { section = "startup", padding = 2 },
         },
       },
