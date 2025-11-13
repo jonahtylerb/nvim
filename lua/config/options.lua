@@ -17,13 +17,23 @@ local function terminalCMD(cmd)
   return tostring(output)
 end
 
-local in_git = LazyVim.root.git() ~= nil
-
-if in_git then
+local function update_working_status()
+  local in_git = LazyVim.root.git() ~= nil
+  
+  if in_git then
   vim.g.working = terminalCMD("git remote get-url origin"):match("gitlab") ~= nil
+  end
+  
+  vim.g.autoformat = not vim.g.working
 end
 
-vim.g.autoformat = not vim.g.working
+update_working_status()
+
+vim.api.nvim_create_autocmd({ "DirChanged", "VimEnter" }, {
+  callback = function()
+    update_working_status()
+  end,
+})
 
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font Mono"
