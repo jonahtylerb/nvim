@@ -1,6 +1,4 @@
 return {
-  { "akinsho/git-conflict.nvim", version = "*", config = true, event = "VeryLazy" },
-
   {
     "nvim-lualine/lualine.nvim",
     opts = {
@@ -37,7 +35,9 @@ return {
       "DiffviewLog",
       "DiffviewRefresh",
     },
-    config = true,
+    opts = {
+      enhanced_diff_hl = true,
+    },
   },
 
   {
