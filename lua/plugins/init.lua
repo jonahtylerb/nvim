@@ -20,6 +20,12 @@ return {
         },
       },
       options = {
+        hover = {
+          enabled = true,
+          delay = 100,
+          reveal = { "close" },
+        },
+        always_show_bufferline = true,
         separator_style = "thin",
       },
     },
