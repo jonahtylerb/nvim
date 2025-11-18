@@ -451,6 +451,7 @@ return {
 
   {
     "saghen/blink.cmp",
+    event = "BufEnter",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -458,10 +459,21 @@ return {
         ghost_text = {
           enabled = false,
         },
+        menu = {
+          winhighlight = "Normal:BlinkCmpMenu,FloatBorder:Statement,CursorLine:BlinkCmpMenuSelection,Search:None",
+          border = "rounded",
+        },
+        documentation = {
+          window = {
+            winhighlight = "FloatBorder:NonText",
+            border = "rounded",
+          },
+        },
       },
       keymap = {
         ["<Tab>"] = {},
         ["<S-Tab>"] = {},
+        ["<C-N>"] = {},
       },
     },
   },
