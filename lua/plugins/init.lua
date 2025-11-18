@@ -422,13 +422,13 @@ return {
       vim.keymap.set("i", "<c-o>", function()
         neocodeium.accept_line()
       end)
-      vim.keymap.set("i", "<A-]>", function()
+      vim.keymap.set("i", "<c-n>", function()
         neocodeium.cycle()
       end)
-      vim.keymap.set("i", "<A-[>", function()
+      vim.keymap.set("i", "<c-b>", function()
         neocodeium.cycle(-1)
       end)
-      vim.keymap.set("i", "<A-c>", function()
+      vim.keymap.set("i", "<c-c>", function()
         neocodeium.clear()
       end)
 
@@ -443,9 +443,9 @@ return {
       { "<Tab>", mode = "i", desc = "Windsurf accept" },
       { "<c-i>", mode = "i", desc = "Windsurf accept word" },
       { "<c-o>", mode = "i", desc = "Windsurf accept line" },
-      { "<A-]>", mode = "i", desc = "Windsurf cycle next" },
-      { "<A-[>", mode = "i", desc = "Windsurf cycle previous" },
-      { "<A-c>", mode = "i", desc = "Windsurf clear" },
+      { "<c-n>", mode = "i", desc = "Windsurf cycle next" },
+      { "<c-b>", mode = "i", desc = "Windsurf cycle previous" },
+      { "<c-c>", mode = "i", desc = "Windsurf clear" },
     },
   },
 
