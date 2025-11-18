@@ -32,6 +32,19 @@ return {
   },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      heading = {
+        sign = true,
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+      },
+      checkbox = {
+        enabled = true,
+      },
+    },
+  },
+
+  {
     "sindrets/diffview.nvim",
     cmd = {
       "DiffviewOpen",
