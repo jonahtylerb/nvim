@@ -4,6 +4,7 @@
 vim.o.timeoutlen = 500
 vim.g.trouble_lualine = false
 vim.opt_local.expandtab = true
+vim.o.textwidth = 80
 vim.g.working = false
 
 local function terminalCMD(cmd)
