@@ -1,8 +1,8 @@
 local header = [[
 __    _  _______  _______  __   __  ___   __   __ 
 |  |  | ||       ||       ||  | |  ||   | |  |_|  |
-|   |_| ||    ___||   _   ||  |_|  ||   | |       |
-|       ||   |___ |  | |  ||       ||   | |       |
+|   |_| ||    ___||   _   ||  | |  ||   | |       |
+|       ||   |___ |  | |  ||  |_|  ||   | |       |
 |  _    ||    ___||  |_|  ||       ||   | |       |
 | | |   ||   |___ |       | |     | |   | | ||_|| |
 |_|  |__||_______||_______|  |___|  |___| |_|   |_|
@@ -517,6 +517,55 @@ return {
       { "<leader>qS", "<cmd>SessionSelect<cr>", desc = "Select Session" },
       { "<leader>ql", "<cmd>SessionLoadLast<cr>", desc = "Restore Last Session" },
       { "<leader>qd", "<cmd>SessionDelete<cr>", desc = "Delete the Current Session" },
+    },
+  },
+
+  {
+    "chrisgrieser/nvim-chainsaw",
+    event = "VeryLazy",
+    opts = {
+      visuals = {
+        icon = false,
+        signHlgroup = false,
+        nvimSatelliteIntegration = {
+          enabled = false,
+        },
+      },
+      logStatements = {
+        variableLog = {
+          javascript = "console.log('{{marker}} {{var}}:', {{var}});",
+        },
+      },
+    },
+    keys = {
+      { "<leader>ccl", "<cmd>lua require('chainsaw').variableLog()<cr>", desc = "Log variable" },
+      { "<leader>cco", "<cmd>lua require('chainsaw').objectLog()<cr>", desc = "Log object" },
+      { "<leader>ccy", "<cmd>lua require('chainsaw').typeLog()<cr>", desc = "Log type" },
+      { "<leader>cct", "<cmd>lua require('chainsaw').timeLog()<cr>", desc = "Log time" },
+      { "<leader>ccs", "<cmd>lua require('chainsaw').stacktraceLog()<cr>", desc = "Log stacktrace" },
+      { "<leader>ccs", "<cmd>lua require('chainsaw').stacktraceLog()<cr>", desc = "Log stacktrace" },
+      { "<leader>cce", "<cmd>lua require('chainsaw').emojiLog()<cr>", desc = "Log emoji" },
+      { "<leader>ccr", "<cmd>lua require('chainsaw').removeLogs()<cr>", desc = "Remove logs" },
+    },
+  },
+
+  {
+    "chrisgrieser/nvim-lsp-endhints",
+    event = "LspAttach",
+    opts = {},
+    keys = {
+      { "<leader>uh", "<cmd>lua require('lsp-endhints').toggle()<cr>", desc = "Toggle end hints" },
+    },
+  },
+
+  {
+    "chrisgrieser/nvim-rulebook",
+    event = "LspAttach",
+    opts = {},
+    keys = {
+      { "<leader>ri", "<cmd>lua require('rulebook').ignoreRule()<cr>", desc = "Ignore rule" },
+      { "<leader>rl", "<cmd>lua require('rulebook').lookupRule()<cr>", desc = "Lookup rule" },
+      { "<leader>rp", "<cmd>lua require('rulebook').prettifyError()<cr>", desc = "Prettify error" },
     },
   },
 }
